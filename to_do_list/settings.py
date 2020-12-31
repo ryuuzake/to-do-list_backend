@@ -22,12 +22,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = get_random_secret_key()
+# SECRET_KEY = get_random_secret_key()
+SECRET_KEY = "4mg7d26bthpa+ct6bd2eu(uaaaylwo-6ezik9n5vzss$*r=3r!"
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["10.0.2.2", "127.0.0.1"]
 
 
 # Application definition
@@ -48,6 +49,9 @@ INSTALLED_APPS = [
     "allauth.socialaccount.providers.google",
     # DRF
     "rest_framework",
+    "rest_framework.authtoken",
+    "rest_auth",
+    "rest_auth.registration",
     # Django-filter
     "django_filters",
     # Own Apps
@@ -114,7 +118,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = "en-us"
 
-TIME_ZONE = "UTC"
+TIME_ZONE = "Asia/Jakarta"
 
 USE_I18N = True
 
@@ -128,6 +132,7 @@ USE_TZ = True
 
 STATIC_URL = "/static/"
 
+STATIC_ROOT = BASE_DIR / "static"
 
 # Authentication Backends
 
@@ -160,7 +165,19 @@ SOCIALACCOUNT_PROVIDERS = {
 REST_FRAMEWORK = {
     # Use Django's standard `django.contrib.auth` permissions,
     # or allow read-only access for unauthenticated users.
-    "DEFAULT_PERMISSION_CLASSES": [
-        "rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly"
-    ]
+    "DEFAULT_PERMISSION_CLASSES": ["rest_framework.permissions.IsAuthenticated"],
+    "DEFAULT_AUTHENTICATION_CLASSES": (
+        "rest_framework_jwt.authentication.JSONWebTokenAuthentication",
+        "rest_framework.authentication.SessionAuthentication",
+        "rest_framework.authentication.BasicAuthentication",
+    ),
+}
+
+
+# Django REST Auth
+
+REST_USE_JWT = True
+
+JWT_AUTH = {
+    "JWT_AUTH_HEADER_PREFIX": "Bearer",
 }
