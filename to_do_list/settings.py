@@ -145,12 +145,11 @@ AUTHENTICATION_BACKENDS = [
 
 # Allauth Settings
 
-SITE_ID = 1
+SITE_ID = 2
 
 # Provider specific settings
 SOCIALACCOUNT_PROVIDERS = {
     "google": {
-        "APP": {"client_id": "123", "secret": "456", "key": ""},
         "SCOPE": [
             "profile",
             "email",

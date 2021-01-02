@@ -29,6 +29,7 @@ class GoogleLogin(SocialLoginView):
     adapter_class = GoogleOAuth2Adapter
     client_class = OAuth2Client
     serializer_class = SocialLoginSerializer
+    callback_url = "http://127.0.0.1:8000/accounts/google/login/callback/"
 
     def get_serializer(self, *args, **kwargs):
         serializer_class = self.get_serializer_class()
