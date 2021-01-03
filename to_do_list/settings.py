@@ -22,8 +22,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-# SECRET_KEY = get_random_secret_key()
-SECRET_KEY = "4mg7d26bthpa+ct6bd2eu(uaaaylwo-6ezik9n5vzss$*r=3r!"
+SECRET_KEY = get_random_secret_key()
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -180,3 +179,8 @@ REST_USE_JWT = True
 JWT_AUTH = {
     "JWT_AUTH_HEADER_PREFIX": "Bearer",
 }
+
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+ACCOUNT_AUTHENTICATION_METHOD = "email"
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_USERNAME_REQUIRED = False
